@@ -39,7 +39,7 @@ const dynamicModelSelection = createMiddleware({
          const messageCount = request.messages.length;
          return handler({
             ...request, //Copy all properties from request
-            model : messageCount > 3 ? advanceModel : basicModel; //Override the model property
+            model : messageCount > 3 ? advanceModel : basicModel, //Override the model property
 
          });    }
         
@@ -84,7 +84,7 @@ const agent = createAgent({
     tools : [getWeather, getUserLocation],
     systemPrompt : SystemPrompt,
     responseFormat,checkpointer,
-    middlewares : [dynamicModelSelection] as const
+    middleware : [dynamicModelSelection] as const
 });
 
 const response = await agent.invoke(
